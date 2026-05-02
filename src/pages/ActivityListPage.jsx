@@ -5,8 +5,8 @@ function ActivityListPage() {
     <div>
       <h1>Activity List</h1>
 
-      {activities.map((activityData, key) => {
-        return <div key={key}>{activityData.title}</div>;
+      {activities.map((activityData) => {
+        return <div key={activityData.id}>{activityData.title}</div>;
       })}
     </div>
   );
