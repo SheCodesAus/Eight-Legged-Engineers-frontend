@@ -1,6 +1,12 @@
 function LoginPage() {
-    return <h1>This is the login page.</h1>;
-
+  return (
+    <div>
+      <h1>Login</h1>
+      <input placeholder="Email" />
+      <input placeholder="Password" />
+      <button>Login</button>
+    </div>
+  );
 }
 
 export default LoginPage;

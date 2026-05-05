@@ -6,18 +6,22 @@ function AdminPage() {
       <h1>Admin Page</h1>
 
       <h2>Manage Activities</h2>
+      <input placeholder="Search activities" />
 
       {activities.map((activity) => {
         return (
           <div key={activity.id}>
             <p>{activity.title}</p>
-            <p>{activity.location}</p>
-            <p>{activity.category}</p>
+            <p>{activity.suburb}</p>
+            <p>{activity.address}</p>
+            <p>{activity.main_category}</p>
+            <p>{activity.cost}</p>
           </div>
         );
       })}
 
       <h2>Manage Users</h2>
+      <input placeholder="Search users" />
 
       {users.map((user) => {
         return (

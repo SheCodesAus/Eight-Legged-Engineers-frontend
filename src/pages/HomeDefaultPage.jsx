@@ -1,9 +1,20 @@
 function HomeDefaultPage() {
   return (
     <div>
-      <h1>Welcome to the Activity Finder</h1>
-      <p>Find activities and places to eat around you.</p>
-      <p>Please log in or sign up to get started.</p>
+      <section>
+        <h2>Header Banner</h2>
+        <button>Login / Sign up</button>
+      </section>
+
+      <section>
+        <h3>Explore</h3>
+        <div>
+          <div>Info Card</div>
+          <div>Info Card</div>
+        </div>
+      </section>
+
+      <footer>Footer</footer>
     </div>
   );
 }
