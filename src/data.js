@@ -1,3 +1,5 @@
+export const savedLocations = [];
+export const users = [];
 export const activities = [
   {
     id: 1,
