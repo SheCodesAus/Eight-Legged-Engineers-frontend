@@ -122,3 +122,34 @@ h1, h2, h3, h4, h5, h6,
   border: none;
   transition: background-color 0.2s, color 0.2s;
 }
+
+
+/* ---- Inputs ───────────────────────────────────────── */
+
+.input-field {
+  width: 100%; 
+  max-width: 400px;
+  margin: 4px; 
+  display: block;
+  padding: 8px 12px; 
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 0.875rem;
+  color: #2F3D50;
+  background-color: #ffffff;
+  border: 1px solid #EFE8D2;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  
+}
+
+.input-field::placeholder {
+  color: #7C9755;
+  opacity: 0.8;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #EAB73D;
+  box-shadow: 0 0 0 2px rgba(234, 183, 61, 0.25);
+}

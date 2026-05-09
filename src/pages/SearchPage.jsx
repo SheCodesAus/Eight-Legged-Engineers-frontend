@@ -10,16 +10,16 @@ function SearchPage() {
 
       <section>
         <h3>What</h3>
-        <input placeholder="Indoor / Outdoor" />
+        <input className="input-field" placeholder="Indoor / Outdoor" />
 
         <h3>Where</h3>
-        <input placeholder="Enter suburb" />
+        <input className="input-field" placeholder="Enter suburb" />
 
         <h3>Who</h3>
-        <input placeholder="Age range" />
+        <input className="input-field" placeholder="Age range" />
 
         <h3>Cost</h3>
-        <input placeholder="Free / $" />
+        <input className="input-field" placeholder="Free / $" />
       </section>
 
       <section>
