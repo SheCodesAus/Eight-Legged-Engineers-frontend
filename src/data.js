@@ -1,5 +1,8 @@
-export const savedLocations = [];
+// ─── Users ────────────────────────────────────────────────────────────────
 export const users = [];
+
+
+// ─── Activities ───────────────────────────────────────────────────────────
 export const activities = [
   {
     id: 1,
@@ -69,10 +72,18 @@ export const activities = [
   },
 ];
 
+
+// ─── Saved Locations (mocked from activities) ─────────────────────────────
+export const savedLocations = activities.slice(0, 2);
+
+
+// ─── Filters ──────────────────────────────────────────────────────────────
 export const filters = {
   indoor_outdoor: ["Indoor", "Outdoor"],
   cost: ["Free", "$", "$$", "$$$", "$$$$"],
   age_range: ["0-6 months", "6-12 months", "1-3 years", "3-5 years"],
 };
 
+
+// ─── Helpers ──────────────────────────────────────────────────────────────
 export const oneActivity = activities[0];

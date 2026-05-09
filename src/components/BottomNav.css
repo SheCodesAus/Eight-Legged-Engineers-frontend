@@ -50,3 +50,8 @@
   font-weight: 600;
   letter-spacing: 0.02em;
 }
+
+.page-with-bottom-nav {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}

@@ -24,8 +24,8 @@ function ActivityListPage() {
           );
         })}
       </section>
-
     </div>
+
   );
 }
 

@@ -1,7 +1,12 @@
-import AdminProfilePage from './pages/AdminProfilePage'
+import Map from './components/Map';
 
 function App() {
-  return <AdminProfilePage />
+  return (
+    <div>
+      <h1>Map</h1>
+      <Map />
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -12,8 +12,6 @@ function NavBar() {
         <Link to="/activities">Activities</Link> |{" "}
         <Link to="/activities/1">Activity Detail</Link> |{" "}
         <Link to="/profile">Profile</Link> |{" "}
-        <Link to="/settings">Settings</Link> |{" "}
-        <Link to="/saved-locations">Saved Locations</Link> |{" "}
         <Link to="/admin">Admin</Link>
       </nav>
 
