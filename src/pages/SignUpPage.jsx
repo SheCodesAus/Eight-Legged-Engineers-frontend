@@ -7,14 +7,14 @@ function SignUpPage() {
 
       <section>
         <h3> Add your details</h3>
-        <input placeholder="First Name" />
-        <input placeholder="Email" />
-        <input placeholder="Password" />
+        <input className="input-field" placeholder="First Name" />
+        <input className="input-field" placeholder="Email" />
+        <input className="input-field" placeholder="Password" />
       </section>
 
       <section>
         <h3>Add children</h3>
-        <input placeholder="Age range" />
+        <input className="input-field" placeholder="Age range" />
         <button className="btn-secondary">Add child</button>
       </section>
 

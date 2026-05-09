@@ -7,7 +7,7 @@ function AdminPage() {
       <h2>Admin Page</h2>
 
       <h3>Manage Activities</h3>
-      <input placeholder="Search activities" />
+      <input className="input-field" placeholder="Search activities" />
 
       {activities.map((activity) => {
         return (
