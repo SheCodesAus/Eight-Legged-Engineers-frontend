@@ -13,7 +13,9 @@ function HomeLoggedInPage() {
       </section>
 
       <section>
-        <input placeholder="What can I do right now?" />
+        <input 
+            className="input-field"
+            placeholder="What can I do right now?" />
       </section>
 
       <section>

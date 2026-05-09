@@ -7,15 +7,15 @@ function ProfileDetailsPage() {
 
       <section>
         <h4>Your details</h4>
-        <input placeholder="First Name" />
-        <input placeholder="Email" />
-        <input placeholder="Password" />
+        <input className="input-field" placeholder="First Name" />
+        <input className="input-field" placeholder="Email" />
+        <input className="input-field" placeholder="Password" />
       </section>
 
       <section>
         <h4>Children</h4>
-        <input placeholder="Age range" />
-        <input placeholder="Age range" />
+        <input className="input-field" placeholder="Age range" />
+        <input className="input-field" placeholder="Age range" />
         <button className="btn-primary">Add another child</button>
       </section>
 
