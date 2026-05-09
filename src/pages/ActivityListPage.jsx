@@ -1,4 +1,5 @@
 import { activities } from "../data";
+import "../index.css";
 
 function ActivityListPage() {
   return (

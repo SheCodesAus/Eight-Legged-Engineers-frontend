@@ -1,3 +1,5 @@
+import "../index.css";
+
 function SearchPage() {
   return (
     <div>
@@ -21,8 +23,8 @@ function SearchPage() {
       </section>
 
       <section>
-        <button>Reset</button>
-        <button>Search</button>
+        <button className="btn-primary">Reset</button>
+        <button className="btn-secondary">Search</button>
       </section>
     </div>
   );

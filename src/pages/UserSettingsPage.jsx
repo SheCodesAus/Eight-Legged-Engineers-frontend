@@ -1,12 +1,14 @@
+import "../index.css";
+
 function UserSettingsPage() {
   return (
     <div>
-      <h1>User Settings</h1>
+      <h2>User Settings</h2>
 
       <section>
-        <button>Profile</button>
-        <button>Saved</button>
-        <button>Logout</button>
+        <button className="btn-primary">Profile</button>
+        <button className="btn-secondary">Saved</button>
+        <button className="btn-tertiary">Logout</button>
       </section>
 
       <footer>Footer</footer>

@@ -1,11 +1,12 @@
 import { users, activities } from "../data";
+import "../index.css";
 
 function AdminPage() {
   return (
     <div>
-      <h1>Admin Page</h1>
+      <h2>Admin Page</h2>
 
-      <h2>Manage Activities</h2>
+      <h3>Manage Activities</h3>
       <input placeholder="Search activities" />
 
       {activities.map((activity) => {
@@ -20,7 +21,7 @@ function AdminPage() {
         );
       })}
 
-      <h2>Manage Users</h2>
+      <h3>Manage Users</h3>
       <input placeholder="Search users" />
 
       {users.map((user) => {
