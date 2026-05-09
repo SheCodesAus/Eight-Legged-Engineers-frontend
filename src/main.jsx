@@ -11,10 +11,8 @@ import HomeDefaultPage from "./pages/HomeDefaultPage.jsx";
 import HomeLoggedInPage from "./pages/HomeLoggedInPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfileDetailsPage from "./pages/ProfileDetailsPage.jsx";
-import SavedLocationsPage from "./pages/SavedLocationsPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
-import UserSettingsPage from "./pages/UserSettingsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,11 +28,7 @@ const router = createBrowserRouter([
       { path: "/search", element: <SearchPage /> },
       { path: "/activities", element: <ActivityListPage /> },
       { path: "/activities/:id", element: <ActivityDetailPage /> },
-
       { path: "/profile", element: <ProfileDetailsPage /> },
-      { path: "/saved-locations", element: <SavedLocationsPage /> },
-      { path: "/settings", element: <UserSettingsPage /> },
-
       { path: "/admin", element: <AdminPage /> },
     ],
   },
