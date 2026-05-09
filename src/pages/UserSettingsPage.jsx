@@ -11,7 +11,6 @@ function UserSettingsPage() {
         <button className="btn-tertiary">Logout</button>
       </section>
 
-      <footer>Footer</footer>
     </div>
   );
 }

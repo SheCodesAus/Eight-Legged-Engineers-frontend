@@ -19,7 +19,6 @@ function ProfileDetailsPage() {
         <button className="btn-primary">Add another child</button>
       </section>
 
-      <footer>Footer</footer>
     </div>
   );
 }

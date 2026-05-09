@@ -11,7 +11,6 @@ function SavedLocationsPage() {
         return <div key={savedLocation.id}>{savedLocation.location}</div>;
       })}
 
-      <footer>Footer</footer>
     </div>
   );
 }
