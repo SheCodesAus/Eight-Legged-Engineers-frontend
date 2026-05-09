@@ -1,21 +1,24 @@
+import "../index.css";
+
 function SignUpPage() {
   return (
     <div>
       <h1>Sign Up</h1>
 
       <section>
+        <h3> Add your details</h3>
         <input placeholder="First Name" />
         <input placeholder="Email" />
         <input placeholder="Password" />
       </section>
 
       <section>
-        <h3>Children</h3>
+        <h3>Add children</h3>
         <input placeholder="Age range" />
-        <button>Add child</button>
+        <button className="btn-secondary">Add child</button>
       </section>
 
-      <button>Submit</button>
+      <button className="btn-primary">Submit</button>
 
       <footer>Footer</footer>
     </div>

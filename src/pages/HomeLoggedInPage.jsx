@@ -1,3 +1,5 @@
+import "../index.css";
+
 function HomeLoggedInPage() {
   return (
     <div>
@@ -6,8 +8,8 @@ function HomeLoggedInPage() {
       </section>
 
       <section>
-        <button>Eateries</button>
-        <button>Activities</button>
+        <button className="btn-primary">Eateries</button>
+        <button className="btn-secondary">Activities</button>
       </section>
 
       <section>

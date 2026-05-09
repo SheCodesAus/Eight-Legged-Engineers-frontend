@@ -1,4 +1,5 @@
 import { oneActivity } from "../data";
+import "../index.css";
 
 function ActivityDetailPage() {
   return (
