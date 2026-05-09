@@ -1,0 +1,16 @@
+import "../index.css";
+import "./ActivityCard.css";
+
+function ActivityCard({ title, address, cost, openingHours, age }) {
+    return (
+        <div className="activity-card">
+        <h5 className="h5">{title}</h5>
+        <p className="bodyCopy">{address}</p>
+        <p className="tag">{cost}</p>
+        <p className="tag">{openingHours}</p>
+        <p className="tag">{age}</p>
+      </div>
+    );
+}
+
+export default ActivityCard;

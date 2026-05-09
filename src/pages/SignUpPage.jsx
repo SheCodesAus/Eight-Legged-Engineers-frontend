@@ -20,7 +20,6 @@ function SignUpPage() {
 
       <button className="btn-primary">Submit</button>
 
-      <footer>Footer</footer>
     </div>
   );
 }

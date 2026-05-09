@@ -25,7 +25,6 @@ function ActivityListPage() {
         })}
       </section>
 
-      <footer>Footer</footer>
     </div>
   );
 }

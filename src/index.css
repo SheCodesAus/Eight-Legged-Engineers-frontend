@@ -80,6 +80,18 @@ h1, h2, h3, h4, h5, h6,
   flex-direction: column;
 }
 
+/* ── Tags ─────────────────────────────────────────────────── */
+.tag{
+    background-color: #FAF1DD; 
+    color: #2F3D50;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 12px;                                                                                
+    border-radius: 999px;                                                 
+    padding: 4px 8px;                                                    
+    display: inline-block;
+    margin: 4px;
+}
+
 /* ---- Buttons ─────────────────────────────────────────────────────────────── */
 .btn-primary {
   padding: 8px 12px;
@@ -122,3 +134,4 @@ h1, h2, h3, h4, h5, h6,
   border: none;
   transition: background-color 0.2s, color 0.2s;
 }
+

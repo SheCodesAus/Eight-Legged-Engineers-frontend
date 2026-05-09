@@ -1,4 +1,5 @@
 import "../index.css";
+import PopularActivitiesTile from "../components/PopularActivitiesTile";
 
 function HomeLoggedInPage() {
   return (
@@ -19,21 +20,20 @@ function HomeLoggedInPage() {
       <section>
         <h3>Popular Activities</h3>
         <div>
-          <div>Activity Card</div>
-          <div>Activity Card</div>
-          <div>Activity Card</div>
+          <PopularActivitiesTile title="Swimming" image_url="https://example.com/swimming.jpg" />
+          <PopularActivitiesTile title="Art Class" image_url="https://example.com/art-class.jpg" />
+          <PopularActivitiesTile title="Cooking Workshop" image_url="https://example.com/cooking-workshop.jpg" />
         </div>
       </section>
 
       <section>
-        <h3>Places to eat</h3>
+        <h3>Popular Eateries</h3>
         <div>
-          <div>Eatery Card</div>
-          <div>Eatery Card</div>
+          <PopularActivitiesTile title="Burger Joint" image_url="https://example.com/burger-joint.jpg" />
+          <PopularActivitiesTile title="Pizza Place" image_url="https://example.com/pizza-place.jpg" />
         </div>
       </section>
 
-      <footer>Footer</footer>
     </div>
   );
 }
