@@ -11,8 +11,6 @@ import HomeDefaultPage from "./pages/HomeDefaultPage.jsx";
 import HomeLoggedInPage from "./pages/HomeLoggedInPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfileDetailsPage from "./pages/ProfileDetailsPage.jsx";
-import SearchPage from "./pages/SearchPage.jsx";
-import SignUpPage from "./pages/SignUpPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +21,8 @@ const router = createBrowserRouter([
       { path: "/home", element: <HomeLoggedInPage /> },
 
       { path: "/login", element: <LoginPage /> },
-      { path: "/signup", element: <SignUpPage /> },
 
-      { path: "/search", element: <SearchPage /> },
-      { path: "/activities", element: <ActivityListPage /> },
+{ path: "/activities", element: <ActivityListPage /> },
       { path: "/activities/:id", element: <ActivityDetailPage /> },
       { path: "/profile", element: <ProfileDetailsPage /> },
       { path: "/admin", element: <AdminPage /> },

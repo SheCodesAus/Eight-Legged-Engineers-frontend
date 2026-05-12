@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import BottomNav from '../components/BottomNav'
 import './AdminProfilePage.css'
 
 const DUMMY_USERS = [
@@ -121,7 +120,6 @@ function AdminProfilePage() {
 
       </main>
 
-      <BottomNav activePage="profile" />
     </div>
   )
 }
