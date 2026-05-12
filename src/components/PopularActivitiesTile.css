@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+.popular-activities-tile {
+    background-color: #EFE8D2;
+    border-radius:24px;
+    margin: 12px 16px;
+    padding: 16px 16px 16px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;                                                                     
+=======
 .popular-activities-container {
     display: flex;
     gap: 12px;
@@ -31,4 +41,5 @@
 
 .popular-activities-title {
     margin: 0;
+>>>>>>> main
 }

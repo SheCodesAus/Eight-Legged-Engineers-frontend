@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
-import "./HomeLoggedInPage.css";
 import PopularActivitiesTile from "../components/PopularActivitiesTile";
-import { savedLocations, filters } from "../data";
+import WeatherBadge from "../components/WeatherBadge";
+import "./HomeLoggedInPage.css";
 
 function HomeLoggedInPage() {
   const navigate = useNavigate();
