@@ -1,0 +1,94 @@
+.login-page {
+  flex: 1;
+  background-color: #2F3D50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.login-panel {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-header {
+  text-align: center;
+}
+
+.login-brand {
+  font-size: 42px;
+  margin-bottom: 4px;
+}
+
+.login-tagline {
+  color: #EAB73D;
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.login-title {
+  color: #FAF1DD;
+  font-size: 22px;
+  margin: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-input {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background-color: #FAF1DD;
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.login-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-cta {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 16px;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.link-pink {
+  color: #E8829D;
+}
+
+.link-sky {
+  color: #8DC3D6;
+}
+
+.link-gold {
+  color: #EAB73D;
+  align-self: center;
+}

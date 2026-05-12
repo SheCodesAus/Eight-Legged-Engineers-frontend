@@ -1,0 +1,72 @@
+.activity-list-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  gap: 16px;
+  background-color: #F8F3E6;
+}
+
+.results-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.results-header h2 {
+  margin: 0;
+}
+
+.results-count {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  color: #2F3D50;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.activity-card-link {
+  cursor: pointer;
+}
+
+.activity-card-link:hover .activity-card {
+  background-color: #e0d9c5;
+}
+
+.no-results-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.no-results {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  color: #2F3D50;
+  opacity: 0.55;
+  margin: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  .activity-list-page {
+    padding: 28px 32px;
+    max-width: 720px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .activity-list-page {
+    max-width: 960px;
+    padding: 36px 48px;
+  }
+}
