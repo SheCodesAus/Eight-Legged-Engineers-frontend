@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import NavBar from "./components/NavBar.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 import ActivityDetailPage from "./pages/ActivityDetailPage.jsx";
 import ActivityListPage from "./pages/ActivityListPage.jsx";
@@ -18,14 +19,18 @@ const router = createBrowserRouter([
     element: <NavBar />,
     children: [
       { path: "/", element: <HomeDefaultPage /> },
-      { path: "/home", element: <HomeLoggedInPage /> },
-
       { path: "/login", element: <LoginPage /> },
-
-{ path: "/activities", element: <ActivityListPage /> },
+      { path: "/activities", element: <ActivityListPage /> },
       { path: "/activities/:id", element: <ActivityDetailPage /> },
-      { path: "/profile", element: <ProfileDetailsPage /> },
-      { path: "/admin", element: <AdminPage /> },
+
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/home", element: <HomeLoggedInPage /> },
+          { path: "/profile", element: <ProfileDetailsPage /> },
+          { path: "/admin", element: <AdminPage /> },
+        ],
+      },
     ],
   },
 ]);

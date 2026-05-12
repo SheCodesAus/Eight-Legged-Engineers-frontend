@@ -1,21 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "../lib/supabaseClient";
 import "../index.css";
 import "./ProfileDetailsPage.css";
 
 function ProfileDetailsPage() {
   const [activeTab, setActiveTab] = useState("profile");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      const token = data.session?.access_token;
+      if (!token) return;
+
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/users/me/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          setUser(data);
+          setLoading(false);
+        });
+    });
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <main className="profile-details-page">
       <header className="profile-header">
-        <div className="profile-avatar">U</div>
+        <div className="profile-avatar">
+          {user?.email?.[0].toUpperCase() ?? "U"}
+        </div>
 
         <div className="profile-header-info">
           <div className="profile-name-row">
-            <h1 className="profile-name">User Name</h1>
+            <h1 className="profile-name">{user?.email}</h1>
             <span className="profile-role-badge">Parent</span>
           </div>
-          <p className="profile-email">useremail@email.com.au</p>
+          <p className="profile-email">{user?.email}</p>
         </div>
       </header>
 
@@ -42,25 +68,17 @@ function ProfileDetailsPage() {
       </section>
 
       {activeTab === "profile" && (
-        <>
-          <section className="profile-content">
-            <h4>
-              Your <span className="text-coral">profile</span>
-            </h4>
-            <input className="input-field" placeholder="First Name" />
-            <input className="input-field" placeholder="Email" />
-            <input className="input-field" placeholder="Password" />
-          </section>
-
-          <section className="profile-content">
-            <h4>
-              Your <span className="text-olive">children</span>
-            </h4>
-            <input className="input-field" placeholder="Age range" />
-            <input className="input-field" placeholder="Age range" />
-            <button className="btn-primary profile-add-btn">Add another child</button>
-          </section>
-        </>
+        <section className="profile-content">
+          <h4>
+            Your <span className="text-coral">profile</span>
+          </h4>
+          <input
+            className="input-field"
+            placeholder="Email"
+            defaultValue={user?.email}
+            readOnly
+          />
+        </section>
       )}
 
       {activeTab === "saved" && (
@@ -68,24 +86,7 @@ function ProfileDetailsPage() {
           <h4>
             Your <span className="text-coral">saved locations</span>
           </h4>
-
-          <div className="list-card">
-            <div className="activity-thumb"></div>
-            <div className="card-text">
-              <p className="card-name">Swimming Pool</p>
-              <p className="card-sub">Family friendly activity</p>
-              <p className="card-meta">Saved location</p>
-            </div>
-          </div>
-
-          <div className="list-card">
-            <div className="activity-thumb"></div>
-            <div className="card-text">
-              <p className="card-name">Pizza Place</p>
-              <p className="card-sub">Kid-friendly eatery</p>
-              <p className="card-meta">Saved location</p>
-            </div>
-          </div>
+          <p>Saved locations coming soon.</p>
         </section>
       )}
     </main>
