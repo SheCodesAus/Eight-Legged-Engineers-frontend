@@ -30,7 +30,6 @@ function ActivityDetailPage() {
         <button>👎</button>
       </section>
 
-      <footer>Footer</footer>
     </div>
   );
 }

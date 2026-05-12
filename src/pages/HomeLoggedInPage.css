@@ -1,0 +1,25 @@
+.search-section {
+  padding: 16px 30px;
+}
+
+.search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-bar .input-field {
+  position: relative;
+  padding-right: 90px;
+}
+
+.search-bar .weather-badge {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d9972b;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+}
