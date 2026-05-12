@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../index.css";
 import "./ProfileDetailsPage.css";
-import BottomNav from "../components/BottomNav";
 
 function ProfileDetailsPage() {
   const [activeTab, setActiveTab] = useState("profile");
@@ -59,7 +58,7 @@ function ProfileDetailsPage() {
             </h4>
             <input className="input-field" placeholder="Age range" />
             <input className="input-field" placeholder="Age range" />
-            <button className="btn-primary">Add another child</button>
+            <button className="btn-primary profile-add-btn">Add another child</button>
           </section>
         </>
       )}
@@ -89,7 +88,6 @@ function ProfileDetailsPage() {
           </div>
         </section>
       )}
-      <BottomNav />
     </main>
   );
 }

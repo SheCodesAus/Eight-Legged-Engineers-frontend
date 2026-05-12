@@ -1,20 +1,24 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "./Map.css";
 
-export default function Map() {
+export default function Map({ lat, lng }) {
   return (
-        <MapContainer
-        center={[-33.8688, 151.2093]}
+    <div className="map-wrapper">
+      <MapContainer
+        center={[lat, lng]}
         zoom={13}
-        style={{ height: '375px', width: '100%' }}
-    >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+        className="map-container"
+      >
+        <TileLayer
+          attribution="&copy; OpenStreetMap contributors"
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      <Marker position={[-33.8688, 151.2093]}>
-        <Popup>Sydney</Popup>
-      </Marker>
-    </MapContainer>
+        <Marker position={[lat, lng]}>
+          <Popup>Location</Popup>
+        </Marker>
+      </MapContainer>
+    </div>
   );
 }

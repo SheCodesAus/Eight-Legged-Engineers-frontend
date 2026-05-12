@@ -1,0 +1,140 @@
+.home-landing {
+  flex: 1;
+  background-color: #FAF1DD;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.brand-block {
+  background-color: #2F3D50;
+  border-radius: 28px;
+  padding: 26px 22px;
+  box-shadow: 8px 8px 0 #EAB73D;
+}
+
+.home-brand {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  font-size: 54px;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.home-brand span:first-child {
+  color: #EAB73D;
+}
+
+.home-brand span:last-child {
+  color: #E85D44;
+}
+
+.home-tagline {
+  max-width: 300px;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #2F3D50;
+  margin: 0;
+}
+
+.home-cvps {
+  display: grid;
+  gap: 12px;
+}
+
+.cvp-block {
+  border-radius: 22px;
+  padding: 16px;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cvp-block p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cvp-kicker {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.cvp-yellow {
+  background-color: #EAB73D;
+  color: #2F3D50;
+}
+
+.cvp-tomato {
+  background-color: #E85D44;
+  color: #FAF1DD;
+}
+
+.cvp-blue {
+  background-color: #2F3D50;
+  color: #FAF1DD;
+}
+
+.home-cta {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 18px;
+}
+
+/* ── Tablet (640px+) ─────────────────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  .home-landing {
+    padding: 40px;
+    align-items: center;
+  }
+
+  .home-hero,
+  .home-cta {
+    width: 100%;
+    max-width: 540px;
+  }
+
+}
+
+/* ── Desktop (1024px+) ───────────────────────────────────────────────────── */
+
+@media (min-width: 1024px) {
+  .home-landing {
+    padding: 60px 80px;
+  }
+
+  .home-hero,
+  .home-cta {
+    max-width: 640px;
+  }
+
+  .home-brand {
+    font-size: 72px;
+  }
+
+  .home-tagline {
+    font-size: 20px;
+    max-width: 400px;
+  }
+}

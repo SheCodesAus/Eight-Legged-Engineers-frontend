@@ -1,5 +1,5 @@
 .login-page {
-  min-height: 100svh;
+  flex: 1;
   background-color: #2F3D50;
   display: flex;
   align-items: center;
