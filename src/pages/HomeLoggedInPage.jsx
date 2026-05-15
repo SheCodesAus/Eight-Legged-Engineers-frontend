@@ -1,13 +1,26 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabaseClient";
 import "../index.css";
+import "./HomeLoggedInPage.css";
 import PopularActivitiesTile from "../components/PopularActivitiesTile";
 import WeatherBadge from "../components/WeatherBadge";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const INDOOR_OUTDOOR_OPTIONS = ["Indoor", "Outdoor"];
+
+function calculateAge(birthMonth, birthYear) {
+  const now = new Date();
+  const currentMonth = now.getMonth() + 1;
+  const currentYear = now.getFullYear();
+  let age = currentYear - birthYear;
+  if (currentMonth < birthMonth) age -= 1;
+  return age;
+}
 
 function HomeLoggedInPage() {
   const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState("activities");
   const [searchForm, setSearchForm] = useState({
     indoor_outdoor: "",
@@ -15,22 +28,37 @@ function HomeLoggedInPage() {
     age: "",
     cost: "",
   });
+  const [kids, setKids] = useState([]);
   const [suburbSuggestions, setSuburbSuggestions] = useState([]);
   const [popularActivities, setPopularActivities] = useState([]);
   const [popularEateries, setPopularEateries] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/venues/?main_category=Activity`)
+    fetch(`${API_BASE}/venues/?main_category=Activity`)
       .then((res) => res.json())
       .then((data) => setPopularActivities(data.slice(0, 5)));
 
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/venues/?main_category=Eatery`)
+    fetch(`${API_BASE}/venues/?main_category=Eatery`)
       .then((res) => res.json())
       .then((data) => setPopularEateries(data.slice(0, 5)));
+
+    // Fetch the user's kids for the Who dropdown
+    supabase.auth.getSession().then(({ data }) => {
+      const token = data.session?.access_token;
+      if (!token) return;
+      fetch(`${API_BASE}/users/me/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setKids(data.kids ?? []));
+    });
   }, []);
 
   const handleChange = (e) => {
-    setSearchForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setSearchForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSuburbChange = (e) => {
@@ -38,7 +66,7 @@ function HomeLoggedInPage() {
     setSearchForm((prev) => ({ ...prev, suburb: value }));
 
     if (value.length > 1) {
-      fetch(`${import.meta.env.VITE_API_BASE_URL}/suburbs/search/?search=${value}`)
+      fetch(`${API_BASE}/suburbs/search/?search=${value}`)
         .then((res) => res.json())
         .then((data) => setSuburbSuggestions(data.suburb_matches || []));
     } else {
@@ -59,26 +87,24 @@ function HomeLoggedInPage() {
   const handleSearch = () => {
     const params = new URLSearchParams();
     params.set("category", activeTab);
-    if (searchForm.indoor_outdoor) params.set("indoor_outdoor",
-      searchForm.indoor_outdoor);
+    if (searchForm.indoor_outdoor) params.set("indoor_outdoor", searchForm.indoor_outdoor);
     if (searchForm.suburb.trim()) params.set("suburb", searchForm.suburb.trim());
-    if (searchForm.age.trim()) params.set("age", searchForm.age.trim());
+    if (searchForm.age) params.set("age", searchForm.age);
     if (searchForm.cost) params.set("cost", searchForm.cost);
     navigate(`/activities?${params.toString()}`);
   };
 
+  const popularVenues =
+    activeTab === "activities" ? popularActivities : popularEateries;
+
   return (
     <main className="home-page">
-      <section>
-        <p>Profile</p>
-      </section>
-
-      {/* ── Search ─────────────────────────────────────────────────────────── */}
       <section className="search-section">
         <div className="search-header">
-            <h3 className="search-heading">Find something to do</h3>
-            <WeatherBadge />
-        </div> 
+          <h3 className="search-heading">Find something to do</h3>
+          <WeatherBadge />
+        </div>
+
         <div className="home-tabs" role="tablist">
           <button
             type="button"
@@ -117,7 +143,7 @@ function HomeLoggedInPage() {
             </select>
           </div>
 
-          <div className="search-field" style={{ position: "relative" }}>
+          <div className="search-field suburb-field">
             <label className="search-label">Where</label>
             <input
               className="input-field"
@@ -144,13 +170,49 @@ function HomeLoggedInPage() {
 
           <div className="search-field">
             <label className="search-label">Who</label>
-            <input
-              className="input-field"
-              name="age"
-              placeholder="Child's age"
-              value={searchForm.age}
+            {kids.length > 0 ? (
+              <select
+                className="input-field search-select"
+                name="age"
+                value={searchForm.age}
+                onChange={handleChange}
+              >
+                <option value="">Select a child</option>
+                {kids.map((kid) => {
+                  const age = calculateAge(kid.birth_month, kid.birth_year);
+                  return (
+                    <option key={kid.id} value={age}>
+                      Age {age}
+                    </option>
+                  );
+                })}
+              </select>
+            ) : (
+              <input
+                className="input-field"
+                name="age"
+                placeholder="Child's age"
+                value={searchForm.age}
+                onChange={handleChange}
+              />
+            )}
+          </div>
+
+          <div className="search-field">
+            <label className="search-label">Cost</label>
+            <select
+              className="input-field search-select"
+              name="cost"
+              value={searchForm.cost}
               onChange={handleChange}
-            />
+            >
+              <option value="">Any cost</option>
+              <option value="Free">Free</option>
+              <option value="$">$</option>
+              <option value="$$">$$</option>
+              <option value="$$$">$$$</option>
+              <option value="$$$$">$$$$</option>
+            </select>
           </div>
         </div>
 
@@ -160,37 +222,20 @@ function HomeLoggedInPage() {
         </div>
       </section>
 
-      {/* ACTIVITIES TAB */}
-      {activeTab === "activities" && (
-        <section>
-          <h3>Popular Activities</h3>
-          <div className="popular-activities-container">
-            {popularActivities.map((activity) => (
-              <PopularActivitiesTile
-                key={activity.id}
-                title={activity.name}
-                image_url={activity.image_url}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* EATERIES TAB */}
-      {activeTab === "eateries" && (
-        <section>
-          <h3>Popular Eateries</h3>
-          <div className="popular-activities-container">
-            {popularEateries.map((eatery) => (
-              <PopularActivitiesTile
-                key={eatery.id}
-                title={eatery.name}
-                image_url={eatery.image_url}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+      <section>
+        <h3>
+          {activeTab === "activities" ? "Popular Activities" : "Popular Eateries"}
+        </h3>
+        <div className="popular-activities-container">
+          {popularVenues.map((venue) => (
+            <PopularActivitiesTile
+              key={venue.id}
+              title={venue.title || venue.name}
+              image_url={venue.image_url}
+            />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

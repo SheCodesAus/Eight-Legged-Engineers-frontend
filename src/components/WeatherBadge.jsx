@@ -17,7 +17,7 @@ function WeatherBadge() {
       );
 
       const data = await response.json();
-      setWeather(data);
+      if (data.main) setWeather(data);
     });
   }, []);
 
