@@ -15,6 +15,13 @@
   gap: 14px;
 }
 
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
 .search-heading {
   margin: 0;
 }
