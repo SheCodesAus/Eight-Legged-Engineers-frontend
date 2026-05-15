@@ -48,6 +48,24 @@
   background-color: rgba(234, 183, 61, 0.15);
 }
 
+.dev-nav button {
+  color: #EAB73D;
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.dev-nav button:hover {
+  background-color: rgba(234, 183, 61, 0.15);
+}
+
 /* Desktop (768px+): nav sticky at top, content flows below */
 @media (min-width: 768px) {
   .dev-nav {

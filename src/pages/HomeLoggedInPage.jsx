@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 import PopularActivitiesTile from "../components/PopularActivitiesTile";
-import WeatherBadge from "../components/WeatherBadge";
-import "./HomeLoggedInPage.css";
+
+const INDOOR_OUTDOOR_OPTIONS = ["Indoor", "Outdoor"];
 
 function HomeLoggedInPage() {
   const navigate = useNavigate();
@@ -11,32 +11,57 @@ function HomeLoggedInPage() {
   const [searchForm, setSearchForm] = useState({
     indoor_outdoor: "",
     suburb: "",
-    age_range: "",
+    age: "",
     cost: "",
   });
+  const [suburbSuggestions, setSuburbSuggestions] = useState([]);
+  const [popularActivities, setPopularActivities] = useState([]);
+  const [popularEateries, setPopularEateries] = useState([]);
 
-  const savedActivities = savedLocations.filter(
-    (location) => location.main_category === "Activity"
-  );
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/venues/?main_category=Activity`)
+      .then((res) => res.json())
+      .then((data) => setPopularActivities(data.slice(0, 5)));
 
-  const savedEateries = savedLocations.filter(
-    (location) => location.main_category === "Eatery"
-  );
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/venues/?main_category=Eatery`)
+      .then((res) => res.json())
+      .then((data) => setPopularEateries(data.slice(0, 5)));
+  }, []);
 
   const handleChange = (e) => {
     setSearchForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleSuburbChange = (e) => {
+    const value = e.target.value;
+    setSearchForm((prev) => ({ ...prev, suburb: value }));
+
+    if (value.length > 1) {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/suburbs/search/?search=${value}`)
+        .then((res) => res.json())
+        .then((data) => setSuburbSuggestions(data.suburb_matches || []));
+    } else {
+      setSuburbSuggestions([]);
+    }
+  };
+
+  const handleSuburbSelect = (suburb) => {
+    setSearchForm((prev) => ({ ...prev, suburb }));
+    setSuburbSuggestions([]);
+  };
+
   const handleReset = () => {
-    setSearchForm({ indoor_outdoor: "", suburb: "", age_range: "", cost: "" });
+    setSearchForm({ indoor_outdoor: "", suburb: "", age: "", cost: "" });
+    setSuburbSuggestions([]);
   };
 
   const handleSearch = () => {
     const params = new URLSearchParams();
     params.set("category", activeTab);
-    if (searchForm.indoor_outdoor) params.set("indoor_outdoor", searchForm.indoor_outdoor);
+    if (searchForm.indoor_outdoor) params.set("indoor_outdoor",
+      searchForm.indoor_outdoor);
     if (searchForm.suburb.trim()) params.set("suburb", searchForm.suburb.trim());
-    if (searchForm.age_range.trim()) params.set("age_range", searchForm.age_range.trim());
+    if (searchForm.age.trim()) params.set("age", searchForm.age.trim());
     if (searchForm.cost) params.set("cost", searchForm.cost);
     navigate(`/activities?${params.toString()}`);
   };
@@ -83,47 +108,46 @@ function HomeLoggedInPage() {
               onChange={handleChange}
             >
               <option value="">Indoor or Outdoor?</option>
-              {filters.indoor_outdoor.map((opt) => (
+              {INDOOR_OUTDOOR_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>{opt}</option>
               ))}
             </select>
           </div>
 
-          <div className="search-field">
+          <div className="search-field" style={{ position: "relative" }}>
             <label className="search-label">Where</label>
             <input
               className="input-field"
               name="suburb"
               placeholder="Enter suburb"
               value={searchForm.suburb}
-              onChange={handleChange}
+              onChange={handleSuburbChange}
+              autoComplete="off"
             />
+            {suburbSuggestions.length > 0 && (
+              <ul className="suburb-suggestions">
+                {suburbSuggestions.map((s) => (
+                  <li
+                    key={s.suburb}
+                    onClick={() => handleSuburbSelect(s.suburb)}
+                    className="suburb-suggestion-item"
+                  >
+                    {s.suburb}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className="search-field">
             <label className="search-label">Who</label>
             <input
               className="input-field"
-              name="age_range"
-              placeholder="Age range"
-              value={searchForm.age_range}
+              name="age"
+              placeholder="Child's age"
+              value={searchForm.age}
               onChange={handleChange}
             />
-          </div>
-
-          <div className="search-field">
-            <label className="search-label">Cost</label>
-            <select
-              className="input-field search-select"
-              name="cost"
-              value={searchForm.cost}
-              onChange={handleChange}
-            >
-              <option value="">Any cost</option>
-              {filters.cost.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
           </div>
         </div>
 
@@ -135,57 +159,34 @@ function HomeLoggedInPage() {
 
       {/* ACTIVITIES TAB */}
       {activeTab === "activities" && (
-        <>
-          <section>
-            <h3>Popular Activities</h3>
-            <div className="popular-activities-container">
-              <PopularActivitiesTile title="Swimming" image_url="https://example.com/swimming.jpg" />
-              <PopularActivitiesTile title="Art Class" image_url="https://example.com/art-class.jpg" />
-              <PopularActivitiesTile title="Cooking Workshop" image_url="https://example.com/cooking-workshop.jpg" />
-              <PopularActivitiesTile title="Yoga" image_url="https://example.com/yoga.jpg" />
-              <PopularActivitiesTile title="Pottery" image_url="https://example.com/pottery.jpg" />
-            </div>
-          </section>
-
-          <section>
-            <h3>Saved Activities</h3>
-            <div className="popular-activities-container">
-              {savedActivities.map((location) => (
-                <PopularActivitiesTile
-                  key={location.id}
-                  title={location.title}
-                  image_url={location.image_url}
-                />
-              ))}
-            </div>
-          </section>
-        </>
+        <section>
+          <h3>Popular Activities</h3>
+          <div className="popular-activities-container">
+            {popularActivities.map((activity) => (
+              <PopularActivitiesTile
+                key={activity.id}
+                title={activity.name}
+                image_url={activity.image_url}
+              />
+            ))}
+          </div>
+        </section>
       )}
 
       {/* EATERIES TAB */}
       {activeTab === "eateries" && (
-        <>
-          <section>
-            <h3>Popular Eateries</h3>
-            <div className="popular-activities-container">
-              <PopularActivitiesTile title="Burger Joint" image_url="https://example.com/burger-joint.jpg" />
-              <PopularActivitiesTile title="Pizza Place" image_url="https://example.com/pizza-place.jpg" />
-            </div>
-          </section>
-
-          <section>
-            <h3>Saved Eateries</h3>
-            <div className="popular-activities-container">
-              {savedEateries.map((location) => (
-                <PopularActivitiesTile
-                  key={location.id}
-                  title={location.title}
-                  image_url={location.image_url}
-                />
-              ))}
-            </div>
-          </section>
-        </>
+        <section>
+          <h3>Popular Eateries</h3>
+          <div className="popular-activities-container">
+            {popularEateries.map((eatery) => (
+              <PopularActivitiesTile
+                key={eatery.id}
+                title={eatery.name}
+                image_url={eatery.image_url}
+              />
+            ))}
+          </div>
+        </section>
       )}
     </main>
   );

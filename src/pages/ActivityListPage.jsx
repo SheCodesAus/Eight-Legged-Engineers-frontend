@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { activities } from "../data";
 import ActivityCard from "../components/ActivityCard";
 import "../index.css";
 import "./ActivityListPage.css";
@@ -14,15 +14,27 @@ function ActivityListPage() {
   const cost = searchParams.get("cost");
   const hasFilters = category || indoorOutdoor || suburb || cost;
 
-  const categoryLabel = { activities: "Activity", eateries: "Eatery" }[category];
+  const [venues, setVenues] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const results = activities.filter((activity) => {
-    if (categoryLabel && activity.main_category !== categoryLabel) return false;
-    if (indoorOutdoor && activity.indoor_outdoor !== indoorOutdoor) return false;
-    if (suburb && !activity.suburb.toLowerCase().includes(suburb.toLowerCase())) return false;
-    if (cost && activity.cost !== cost) return false;
-    return true;
-  });
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (category) params.append("main_category", category === "activities" ? "Activity"
+      : "Eatery");
+    if (indoorOutdoor) params.append("indoor_outdoor", indoorOutdoor);
+    if (suburb) params.append("suburb", suburb);
+
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/venues/?${params.toString()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setVenues(data);
+        setLoading(false);
+      });
+  }, [category, indoorOutdoor, suburb]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <main className="activity-list-page">
@@ -30,32 +42,34 @@ function ActivityListPage() {
         <h2>Results</h2>
         {hasFilters && (
           <p className="results-count">
-            {results.length} {results.length === 1 ? "activity" : "activities"} found
+            {venues.length} {venues.length === 1 ? "activity" : "activities"} found
           </p>
         )}
       </div>
 
-      {results.length === 0 ? (
+      {venues.length === 0 ? (
         <div className="no-results-block">
-          <p className="no-results">No activities match your search. Try adjusting your filters.</p>
+          <p className="no-results">No activities match your search. Try adjusting your
+            filters.</p>
           <button className="btn-primary" onClick={() => navigate("/home")}>
             Back to search
           </button>
         </div>
       ) : (
         <div className="results-list">
-          {results.map((activity) => (
+          {venues.map((activity) => (
             <div
               key={activity.id}
               className="activity-card-link"
               onClick={() => navigate(`/activities/${activity.id}`)}
             >
               <ActivityCard
-                title={activity.title}
+                title={activity.name}
                 address={activity.address}
                 cost={activity.cost}
                 openingHours={activity.opening_times}
-                age={activity.age_range}
+                age={activity.min_age && activity.max_age ?
+                  `${activity.min_age}–${activity.max_age} yrs` : ""}
               />
             </div>
           ))}
