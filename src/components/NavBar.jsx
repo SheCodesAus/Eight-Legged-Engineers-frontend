@@ -1,48 +1,75 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabaseClient";
-import "./NavBar.css";
+  import { Link, Outlet, useNavigate } from "react-router-dom";
+  import { supabase } from "../lib/supabaseClient";
+  import WeatherBadge from "./WeatherBadge";
+  import "./NavBar.css";
 
-function NavBar() {
-  const navigate = useNavigate();
-  const [session, setSession] = useState(null);
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+  function NavBar() {
+    const navigate = useNavigate();
+    const [session, setSession] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+    useEffect(() => {
+      supabase.auth.getSession().then(({ data }) => {
+        setSession(data.session);
+        if (data.session?.access_token) {
+          fetch(`${API_BASE}/users/me/`, {
+            headers: { Authorization: `Bearer ${data.session.access_token}` },
+          })
+            .then((res) => res.json())
+            .then((user) => setIsAdmin(user.is_staff || user.is_superuser));
+        }
+      });
 
-    return () => subscription.unsubscribe();
-  }, []);
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session);
+        if (session?.access_token) {
+          fetch(`${API_BASE}/users/me/`, {
+            headers: { Authorization: `Bearer ${session.access_token}` },
+          })
+            .then((res) => res.json())
+            .then((user) => setIsAdmin(user.is_staff || user.is_superuser));
+        } else {
+          setIsAdmin(false);
+        }
+      });
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
+      return () => subscription.unsubscribe();
+    }, []);
 
-  return (
-    <div className="layout-root">
-      <nav className="dev-nav">
-        <Link to="/">Home</Link>
-        <Link to="/home">Logged In</Link>
-        <Link to="/activities">Activities</Link>
-        <Link to="/activities/1">Detail</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/admin">Admin</Link>
-        {session ? (
-          <button onClick={handleLogout}>Logout</button>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-      </nav>
+    const handleLogout = async () => {
+      await supabase.auth.signOut();
+      navigate("/");
+    };
 
-      <div className="layout-content">
-        <Outlet />
+    return (
+      <div className="layout-root">
+        <nav className="dev-nav">
+          {session ? (
+            <>
+              <Link to="/home">Home</Link>
+              <Link to="/activities">Activities</Link>
+              <Link to="/profile">Profile</Link>
+              {isAdmin && <Link to="/admin">Admin</Link>}
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/activities">Activities</Link>
+              <Link to="/login">Login</Link>
+            </>
+          )}
+          <div className="nav-weather">
+            <WeatherBadge />
+          </div>
+        </nav>
+
+        <div className="layout-content">
+          <Outlet />
+        </div>
       </div>
-    </div>
-  );
-}
-
+    );
+  }
 export default NavBar;

@@ -93,3 +93,23 @@
     height: 440px;
   }
 }
+
+.review-button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-count {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+.review-count-number {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  display: block;
+}

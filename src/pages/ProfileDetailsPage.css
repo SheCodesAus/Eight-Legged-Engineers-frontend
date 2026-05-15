@@ -150,6 +150,25 @@
   border-radius: 20px;
 }
 
+/* ── Kids list ───────────────────────────────────────────────────────────── */
+
+.kids-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.kids-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.kids-list-item button {
+  margin-left: 16px;
+}
+
 /* ── List cards ──────────────────────────────────────────────────────────── */
 
 .list-card {
