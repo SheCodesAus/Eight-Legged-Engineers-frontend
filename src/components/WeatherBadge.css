@@ -1,0 +1,13 @@
+.weather-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background-color: white;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2F3D50;
+  white-space: nowrap;
+}

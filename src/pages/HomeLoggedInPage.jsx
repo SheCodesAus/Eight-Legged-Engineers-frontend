@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 import PopularActivitiesTile from "../components/PopularActivitiesTile";
+import WeatherBadge from "../components/WeatherBadge";
 
 const INDOOR_OUTDOOR_OPTIONS = ["Indoor", "Outdoor"];
 
@@ -74,8 +75,10 @@ function HomeLoggedInPage() {
 
       {/* ── Search ─────────────────────────────────────────────────────────── */}
       <section className="search-section">
-        <h3 className="search-heading">Find something to do</h3>
-
+        <div className="search-header">
+            <h3 className="search-heading">Find something to do</h3>
+            <WeatherBadge />
+        </div> 
         <div className="home-tabs" role="tablist">
           <button
             type="button"
