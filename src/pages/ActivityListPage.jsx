@@ -65,6 +65,7 @@ function ActivityListPage() {
             >
               <ActivityCard
                 title={activity.name}
+                image_url={activity.image_url}
                 address={activity.address}
                 cost={activity.cost}
                 openingHours={activity.opening_times}
