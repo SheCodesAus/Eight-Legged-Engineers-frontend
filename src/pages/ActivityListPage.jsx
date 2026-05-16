@@ -39,7 +39,7 @@ function ActivityListPage() {
   return (
     <main className="activity-list-page">
       <div className="results-header">
-        <h2>Results</h2>
+        <h2>Activities</h2>
         {hasFilters && (
           <p className="results-count">
             {venues.length} {venues.length === 1 ? "activity" : "activities"} found
