@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
   import { Link, Outlet, useNavigate } from "react-router-dom";
   import { supabase } from "../lib/supabaseClient";
-  import WeatherBadge from "./WeatherBadge";
   import "./NavBar.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
@@ -61,9 +60,6 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
               <Link to="/login">Login</Link>
             </>
           )}
-          <div className="nav-weather">
-            <WeatherBadge />
-          </div>
         </nav>
 
         <div className="layout-content">
