@@ -3,6 +3,8 @@ import { supabase } from "../lib/supabaseClient";
 import "../index.css";
 import "./ProfileDetailsPage.css";
 import ContactUsTile from "../components/ContactUsTile";
+import WeatherBadge from "../components/WeatherBadge";
+
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 

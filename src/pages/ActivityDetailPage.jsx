@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabaseClient";
 import Map from "../components/Map";
 import "../index.css";
 import "./ActivityDetailPage.css";
+import WeatherBadge from "../components/WeatherBadge";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -86,6 +87,7 @@ function ActivityDetailPage() {
       <section className="activity-info-card">
         <div className="activity-card-header">
           <h2>{activity.name}</h2>
+          <WeatherBadge />
         </div>
 
         <p className="activity-description">{activity.sub_category}</p>
