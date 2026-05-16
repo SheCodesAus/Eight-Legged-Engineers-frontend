@@ -2,6 +2,8 @@
   import { useNavigate } from 'react-router-dom'
   import { supabase } from '../lib/supabaseClient'
   import './AdminPage.css'
+  import WeatherBadge from "../components/WeatherBadge";
+
 
   const API_BASE = import.meta.env.VITE_API_BASE_URL
 

@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import ActivityCard from "../components/ActivityCard";
 import "../index.css";
 import "./ActivityListPage.css";
+import WeatherBadge from "../components/WeatherBadge";
 
 function ActivityListPage() {
   const [searchParams] = useSearchParams();
@@ -40,6 +41,7 @@ function ActivityListPage() {
     <main className="activity-list-page">
       <div className="results-header">
         <h2>Activities</h2>
+        <WeatherBadge />
         {hasFilters && (
           <p className="results-count">
             {venues.length} {venues.length === 1 ? "activity" : "activities"} found

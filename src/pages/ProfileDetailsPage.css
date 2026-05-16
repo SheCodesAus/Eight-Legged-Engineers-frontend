@@ -149,7 +149,14 @@
   padding: 4px 14px;
   border-radius: 20px;
 }
-
+/* ── Kids Form ──────────────────────────────────────────────────────────── */
+.add-kid-form {
+  display: flex;
+  flex-direction: column;
+}
+.add-kid-form button[type="submit"] {
+  align-self: flex-end;
+}
 /* ── Kids list ───────────────────────────────────────────────────────────── */
 
 .kids-list {
