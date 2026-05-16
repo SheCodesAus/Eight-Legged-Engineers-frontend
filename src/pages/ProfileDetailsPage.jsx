@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import "../index.css";
 import "./ProfileDetailsPage.css";
+import ContactUsTile from "../components/ContactUsTile";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -212,6 +213,9 @@ function ProfileDetailsPage() {
           <p>Saved locations coming soon.</p>
         </section>
       )}
+
+      <ContactUsTile />
+      
     </main>
   );
 }
