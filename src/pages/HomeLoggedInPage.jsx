@@ -101,7 +101,7 @@ function HomeLoggedInPage() {
     <main className="home-page">
       <section className="search-section">
         <div className="search-header">
-          <h3 className="search-heading">Find something to do</h3>
+          <h3 className="search-heading">Find <span className="heading-accent">something to do</span></h3>
           <WeatherBadge />
         </div>
 
@@ -224,7 +224,7 @@ function HomeLoggedInPage() {
 
       <section>
         <h3>
-          {activeTab === "activities" ? "Popular Activities" : "Popular Eateries"}
+          {activeTab === "activities" ? <>Popular <span className="heading-accent">Activities</span></> : <>Popular <span className="heading-accent">Eateries</span></>}
         </h3>
         <div className="popular-activities-container">
           {popularVenues.map((venue) => (
