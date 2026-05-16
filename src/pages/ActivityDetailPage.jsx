@@ -5,6 +5,9 @@ import Map from "../components/Map";
 import "../index.css";
 import "./ActivityDetailPage.css";
 import WeatherBadge from "../components/WeatherBadge";
+import starOutline from "../../img/StarOutlineFilled.svg";
+import starFilled from "../../img/StarSharp.png";
+import { useSavedVenues } from "../context/SavedVenuesContext.jsx";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -16,6 +19,7 @@ async function getToken() {
 function ActivityDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isSaved, toggleSaved } = useSavedVenues();
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const [ratings, setRatings] = useState([]);
@@ -82,6 +86,22 @@ function ActivityDetailPage() {
           src={activity.image_url}
           alt={activity.name}
         />
+        <button
+          className="detail-star-btn"
+          aria-label={isSaved(activity.id) ? "Unsave venue" : "Save venue"}
+          onClick={() => toggleSaved({
+            id: activity.id,
+            name: activity.name,
+            image_url: activity.image_url,
+            main_category: activity.main_category,
+          })}
+        >
+          <img
+            src={isSaved(activity.id) ? starFilled : starOutline}
+            alt=""
+            className="detail-star-icon"
+          />
+        </button>
       </section>
 
       <section className="activity-info-card">

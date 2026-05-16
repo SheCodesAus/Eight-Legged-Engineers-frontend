@@ -10,7 +10,7 @@
     border-radius: 16px;
     padding: 12px;
 
-    width: 28%;
+    width: 42%;
     aspect-ratio: 1 / 1;
     flex-shrink: 0;
 
@@ -20,6 +20,12 @@
     justify-content: flex-start;
 
     text-align: center;
+}
+
+@media (min-width: 640px) {
+    .popular-activities-tile {
+        width: 28%;
+    }
 }
 
 .popular-activities-tile img {

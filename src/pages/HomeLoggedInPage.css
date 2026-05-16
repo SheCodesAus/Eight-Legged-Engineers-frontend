@@ -150,6 +150,15 @@
   }
 }
 
+.no-saved-message {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  color: #2F3D50;
+  opacity: 0.55;
+  margin: 0;
+  padding: 0 16px;
+}
+
 @media (min-width: 640px) {
   .home-page {
     max-width: 720px;
