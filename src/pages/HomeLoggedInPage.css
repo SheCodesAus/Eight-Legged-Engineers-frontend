@@ -26,6 +26,10 @@
   margin: 0;
 }
 
+.heading-accent {
+  color: #7C9755;
+}
+
 .search-form {
   display: grid;
   grid-template-columns: 1fr;
@@ -144,6 +148,15 @@
   .search-form {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.no-saved-message {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  color: #2F3D50;
+  opacity: 0.55;
+  margin: 0;
+  padding: 0 16px;
 }
 
 @media (min-width: 640px) {

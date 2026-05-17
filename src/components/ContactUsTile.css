@@ -6,6 +6,21 @@
     min-height: 110px;
 }
 
+@media (min-width: 640px) {
+    .contact-us-tile {
+        max-width: 680px;
+        margin: 16px auto;
+        width: calc(100% - 80px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .contact-us-tile {
+        max-width: 760px;
+        width: calc(100% - 48px);
+    }
+}
+
 .contact-title {
     margin: 0;
     font-size: 1rem;

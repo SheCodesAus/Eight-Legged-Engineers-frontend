@@ -5,6 +5,7 @@ import "../index.css";
 import "./HomeLoggedInPage.css";
 import PopularActivitiesTile from "../components/PopularActivitiesTile";
 import WeatherBadge from "../components/WeatherBadge";
+import { useSavedVenues } from "../context/SavedVenuesContext.jsx";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const INDOOR_OUTDOOR_OPTIONS = ["Indoor", "Outdoor"];
@@ -94,14 +95,22 @@ function HomeLoggedInPage() {
     navigate(`/activities?${params.toString()}`);
   };
 
+  const { savedVenues } = useSavedVenues();
+
   const popularVenues =
     activeTab === "activities" ? popularActivities : popularEateries;
+
+  const savedForTab = savedVenues.filter((v) =>
+    activeTab === "activities"
+      ? v.main_category === "Activity"
+      : v.main_category === "Eatery"
+  );
 
   return (
     <main className="home-page">
       <section className="search-section">
         <div className="search-header">
-          <h3 className="search-heading">Find something to do</h3>
+          <h3 className="search-heading">Find <span className="heading-accent">something to do</span></h3>
           <WeatherBadge />
         </div>
 
@@ -224,7 +233,7 @@ function HomeLoggedInPage() {
 
       <section>
         <h3>
-          {activeTab === "activities" ? "Popular Activities" : "Popular Eateries"}
+          {activeTab === "activities" ? <>Popular <span className="heading-accent">Activities</span></> : <>Popular <span className="heading-accent">Eateries</span></>}
         </h3>
         <div className="popular-activities-container">
           {popularVenues.map((venue) => (
@@ -232,9 +241,32 @@ function HomeLoggedInPage() {
               key={venue.id}
               title={venue.title || venue.name}
               image_url={venue.image_url}
+              onClick={() => navigate(`/activities/${venue.id}`)}
             />
           ))}
         </div>
+      </section>
+
+      <section>
+        <h3>
+          {activeTab === "activities" ? <>Saved <span className="heading-accent">Activities</span></> : <>Saved <span className="heading-accent">Eateries</span></>}
+        </h3>
+        {savedForTab.length === 0 ? (
+          <p className="no-saved-message">
+            No saved {activeTab} yet. Star an activity to save it here.
+          </p>
+        ) : (
+          <div className="popular-activities-container">
+            {savedForTab.map((venue) => (
+              <PopularActivitiesTile
+                key={venue.id}
+                title={venue.name}
+                image_url={venue.image_url}
+                onClick={() => navigate(`/activities/${venue.id}`)}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

@@ -18,6 +18,55 @@
   margin: 0;
 }
 
+.heading-accent {
+  color: #E85D44;
+}
+
+/* ── Type toggle tabs ────────────────────────────────────────────────────── */
+
+.list-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid #3A6EA5;
+}
+
+.list-tab {
+  background: none;
+  border: none;
+  padding: 10px 4px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2F3D50;
+  cursor: pointer;
+  position: relative;
+}
+
+.list-tab.active {
+  color: #E85D44;
+}
+
+.list-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background-color: #E85D44;
+}
+
+/* ── Keyword search ──────────────────────────────────────────────────────── */
+
+.list-search {
+  width: 100%;
+}
+
+.list-search-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .results-count {
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 14px;
