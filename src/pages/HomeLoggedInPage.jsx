@@ -8,7 +8,10 @@ import WeatherBadge from "../components/WeatherBadge";
 import { useSavedVenues } from "../context/SavedVenuesContext.jsx";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
-const INDOOR_OUTDOOR_OPTIONS = ["Indoor", "Outdoor"];
+const INDOOR_OUTDOOR_OPTIONS = [
+  { label: "Indoor", value: "Indoor" },
+  { label: "Outdoor", value: "Outdoor" },
+];
 
 function calculateAge(birthMonth, birthYear) {
   const now = new Date();
@@ -145,9 +148,9 @@ function HomeLoggedInPage() {
               value={searchForm.indoor_outdoor}
               onChange={handleChange}
             >
-              <option value="">Indoor or Outdoor?</option>
+              <option value="">Any</option>
               {INDOOR_OUTDOOR_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
           </div>

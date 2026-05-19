@@ -177,7 +177,6 @@
             <option value="">Indoor / Outdoor</option>
             <option value="Indoor">Indoor</option>
             <option value="Outdoor">Outdoor</option>
-            <option value="Both">Both</option>
           </select>
 
           <input
@@ -332,7 +331,7 @@
                   <option value="">— select —</option>
                   <option value="Indoor">Indoor</option>
                   <option value="Outdoor">Outdoor</option>
-                  <option value="Both">Both</option>
+                  <option value="Both">Indoor and Outdoor</option>
                 </select>
               </label>
               <label>
