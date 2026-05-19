@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import "../index.css";
 import "./ProfileDetailsPage.css";
 import ContactUsTile from "../components/ContactUsTile";
 import WeatherBadge from "../components/WeatherBadge";
+import PopularActivitiesTile from "../components/PopularActivitiesTile";
+import { useSavedVenues } from "../context/SavedVenuesContext.jsx";
 
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
@@ -23,6 +26,8 @@ function calculateAge(birthMonth, birthYear) {
 }
 
 function ProfileDetailsPage() {
+  const navigate = useNavigate();
+  const { savedVenues } = useSavedVenues();
   const [activeTab, setActiveTab] = useState("profile");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,7 +70,7 @@ function ProfileDetailsPage() {
       return;
     }
     if (yearNum > currentYear) {
-      setFormError(`Year must be ${currentYear} or earlier.`);
+      setFormError(`Year must be ${currentYear} or earlier.`); //maximum age is always 12 - the year chosen must dynamic to reflect this bracket
       return;
     }
 
@@ -196,7 +201,7 @@ function ProfileDetailsPage() {
               type="number"
               placeholder={`Birth year (up to ${new Date().getFullYear()})`}
               value={year}
-              min={2000}
+              min={new Date().getFullYear() - 12}//fix here please - the year must be dynamic to reflect the maximum age of 12 years old
               max={new Date().getFullYear()}
               onChange={(e) => setYear(e.target.value)}
             />
@@ -210,9 +215,44 @@ function ProfileDetailsPage() {
       {activeTab === "saved" && (
         <section className="profile-content">
           <h4>
-            Your <span className="text-coral">saved locations</span>
+            Saved <span className="text-coral">Activities</span>
           </h4>
-          <p>Saved locations coming soon.</p>
+          {savedVenues.filter((v) => v.main_category === "Activity").length === 0 ? (
+            <p className="no-saved-message">No saved activities yet. Star an activity to save it here.</p>
+          ) : (
+            <div className="popular-activities-container">
+              {savedVenues
+                .filter((v) => v.main_category === "Activity")
+                .map((venue) => (
+                  <PopularActivitiesTile
+                    key={venue.id}
+                    title={venue.name}
+                    image_url={venue.image_url}
+                    onClick={() => navigate(`/activities/${venue.id}`)}
+                  />
+                ))}
+            </div>
+          )}
+
+          <h4>
+            Saved <span className="text-coral">Eateries</span>
+          </h4>
+          {savedVenues.filter((v) => v.main_category === "Eatery").length === 0 ? (
+            <p className="no-saved-message">No saved eateries yet. Star an eatery to save it here.</p>
+          ) : (
+            <div className="popular-activities-container">
+              {savedVenues
+                .filter((v) => v.main_category === "Eatery")
+                .map((venue) => (
+                  <PopularActivitiesTile
+                    key={venue.id}
+                    title={venue.name}
+                    image_url={venue.image_url}
+                    onClick={() => navigate(`/activities/${venue.id}`)}
+                  />
+                ))}
+            </div>
+          )}
         </section>
       )}
 
