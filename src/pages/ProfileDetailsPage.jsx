@@ -64,8 +64,8 @@ function ProfileDetailsPage() {
       setFormError("Month must be between 1 and 12.");
       return;
     }
-    if (yearNum < 2010 || yearNum > currentYear) {
-      setFormError(`Year must be between 2010 and ${currentYear}.`);
+    if (yearNum > currentYear) {
+      setFormError(`Year must be ${currentYear} or earlier.`);
       return;
     }
 
@@ -194,9 +194,9 @@ function ProfileDetailsPage() {
             <input
               className="input-field"
               type="number"
-              placeholder={`Birth year (2010–${new Date().getFullYear()})`}
+              placeholder={`Birth year (up to ${new Date().getFullYear()})`}
               value={year}
-              min={2010}
+              min={2000}
               max={new Date().getFullYear()}
               onChange={(e) => setYear(e.target.value)}
             />
